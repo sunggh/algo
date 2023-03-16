@@ -10,3 +10,5 @@
 .gitignore
 
 /algo.iml
+/out/
+/src/.idea/

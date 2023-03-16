@@ -13,17 +13,20 @@ public class BOJ_12851 {
 
     static void bfs() {
         Queue<Integer> q = new LinkedList<>();
-        int[] dx = new int[] {-1,1,2}; // dx의 2번째는 큐 poll 값 들어갈거임
+        int[] dx = new int[] {2,-1,1}; // dx의 2번째는 큐 poll 값 들어갈거임
         q.add(N);
         v[N] = 0;
-        if(N == K) { // 같을시 방문하지 않음
-            ans = 0;
+        if(N >= K) { // 같을시 방문하지 않음 (클시 무조건 -1만 동작)
+            ans = N-K;
             cnt = 1;
             return;
         }
         while (!q.isEmpty()) {
             int tmp = q.poll();
-            dx[2] = tmp; // *2 와 같은 효과
+            if(ans != 987654321) { // 정답을 한번 찾았을때 부터는 큰값들은 다 무시
+                if(v[tmp] + 1 > ans) continue;
+            }
+            dx[0] = tmp; // *2 와 같은 효과
             for (int i = 0; i<3;i++) {
                 int lx = tmp + dx[i];
                 if(lx<0||lx >100000 ||v[lx] < v[tmp] + 1) continue; // 새로 추가될 값이 기존에 값보다 클때 제외
